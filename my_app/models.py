@@ -9,15 +9,28 @@ class User(db.Model):
     email = db.Colummn(db.String(100))
     phone = db.Column(db.String(100))
 
-    # availability ?
-
-
     # personality characteristics
+    openness = db.Column(db.Integer())
+    consc = db.Column(db.Integer()) # conscientiousness
+    extraversion = db.Column(db.Integer())
+    agreeable = db.Column(db.Integer())
+    neuroticism = db.Column(db.Integer())
 
     # major?
+    major = db.column(String(20)))
+    # interests ?
 
 
-class User_info(db.Moodeel):
+class Activity(db.model):
+    __tablename__ == "activities"
 
-    __tablename__ == "user data"
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    description = db.Column(db.String(800))
+    link = db.Column(db.String(100))
+
+
+class Date(db.model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    time = # store its relation to google calendar
