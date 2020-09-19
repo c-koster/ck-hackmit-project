@@ -1,12 +1,10 @@
 import os
 
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
+db = SQLAlchemy()
+
 
 
 class User(db.Model):
@@ -26,7 +24,7 @@ class User(db.Model):
     neuroticism = db.Column(db.Integer())
 
     # major?
-    major = db.column(db.String(20))
+    major = db.Column(db.String)
     # interests ?
 
     date_id = db.Column(db.Integer, db.ForeignKey("scheduled_dates.id"), nullable=True)

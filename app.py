@@ -1,6 +1,18 @@
-from my_app import app,models
-from flask import render_template, request, redirect
+import os
+
+from flask import Flask, render_template, request, redirect, jsonify
 import requests
+from models import *
+
+
+base = os.path.abspath(os.path.dirname(__file__))
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(base, 'app.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
 
 @app.route("/")
 def index():
@@ -13,7 +25,7 @@ def add_user():
     """
     signup_request = request.form.get("name")
     #if some form variables don't exist or
-    
+
     return redirect("/",msg="Success! We will communicate further with you once we've found a match.")
 
 
