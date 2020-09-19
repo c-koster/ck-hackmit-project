@@ -1,12 +1,21 @@
-from my_app import db
+import os
+
+
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
+
 
 class User(db.Model):
-    __tablename__ == "users"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
 
     # contact info
     name = db.Column(db.String(100))
-    email = db.Colummn(db.String(100))
+    email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
 
     # personality characteristics
@@ -17,20 +26,49 @@ class User(db.Model):
     neuroticism = db.Column(db.Integer())
 
     # major?
-    major = db.column(String(20)))
+    major = db.column(db.String(20))
     # interests ?
 
+    date_id = db.Column(db.Integer, db.ForeignKey("scheduled_dates.id"), nullable=True)
+    # null before the person is assigned a meeting time
 
-class Activity(db.model):
-    __tablename__ == "activities"
 
+class Activity(db.Model):
+    __tablename__ = "activities"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(800))
     link = db.Column(db.String(100))
 
 
-class Date(db.model):
-
+class Date(db.Model):
+    __tablename__ = "scheduled_dates"
     id = db.Column(db.Integer, primary_key=True)
-    time = # store its relation to google calendar
+    activity = db.Column(db.Integer, db.ForeignKey("activities.id"), nullable=True)
+
+    #time =# store its relation to google calendar
+
+
+    def add_person(self,user_id):
+        """
+        Invite a person to this 'date'
+        """
+
+        pass
+
+    def describe(self,activity_id):
+        """
+        Give this date an activity!
+        """
+
+        pass
+
+    def notify(self):
+        """
+        Tell both people about this time.
+        """
+        pass
+
+if __name__ == "__main__":
+    db.create_all()
+    # code to insert goees here.

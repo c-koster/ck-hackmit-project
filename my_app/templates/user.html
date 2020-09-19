@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User {{ user.name }}
+{% endblock %}
+
+{% block body %}
+    name: {{ user.name }}
+    email: { {user.email }}
+    major: {{ user.major }}
+    
+{% endblock %}

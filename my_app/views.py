@@ -1,4 +1,4 @@
-from my_app import app
+from my_app import app,models
 from flask import render_template, request, redirect
 import requests
 
@@ -13,33 +13,26 @@ def add_user():
     """
     signup_request = request.form.get("name")
     #if some form variables don't exist or
-    if (signup_request == None):
-        return render_template("error.html",msg="Oops. Incomplete form!")
+    
+    return redirect("/",msg="Success! We will communicate further with you once we've found a match.")
 
-    # check database to see if there's a username match.
-    if (acc != None): # if there is a match
-        return render_full_template("error.html",msg="There's already an account by that name!")
-        # return an error
-    db.execute("INSERT INTO users (username,password) VALUES (:user,:pw)", {"user":signup_request[0],"pw":signup_request[1]})
-    db.commit()
-    acc = db.execute("SELECT * FROM users WHERE username = :username", {'username': signup_request[0]}).fetchone()
-    session["user"] = acc.id
-    return redirect("/")
 
 @app.route("/dates/")
 def view_dates():
     # see all dates !
-
-    return render_template("dates.html")
+    """List all Dates."""
+    dates = Date.query.all()
+    return render_template("dates.html",dates=dates)
 
 
 @app.route("/users")
 def view_users():
-    return render_template("users.html")
+    """List all users."""
+    users = User.query.all()
+    return render_template("users.html", users=users)
 
 
-
-@app.route("/user/<id>")
-def view_one_user(id):
-    user = None  # USE ID TO FETCH FROM DB
+@app.route("/user/<int:user_id>")
+def view_one_user(user_id):
+    user = User.query.get(user_id) # USE ID TO FETCH FROM DB
     return render_template("user.html",user=user)

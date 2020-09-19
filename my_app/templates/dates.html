@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All dates
+{% endblock %}
+
+{% block body %}
+    <h1> Dates </h1>
+    <ul>
+    {% for d in dates %}
+        <li>
+            {{ date.id }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    {% endfor %}
+    
+{% endblock %}
