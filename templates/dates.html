@@ -10,10 +10,13 @@
     {% for d in dates %}
         <li>
             {{ date.id }}
+            {% for p in dates.users %}
+                p
+            {% endfor %}
         </li>
     {% endfor %}
     </ul>
 
     {% endfor %}
-    
+
 {% endblock %}

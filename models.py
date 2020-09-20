@@ -2,8 +2,16 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import import_fake
 
-db = SQLAlchemy()
+
+base = os.path.abspath(os.path.dirname(__file__))
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(base, 'app.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
 
 
 
@@ -22,11 +30,9 @@ class User(db.Model):
     extraversion = db.Column(db.Integer())
     agreeable = db.Column(db.Integer())
     neuroticism = db.Column(db.Integer())
-
     # major?
     major = db.Column(db.String)
     # interests ?
-
     date_id = db.Column(db.Integer, db.ForeignKey("scheduled_dates.id"), nullable=True)
     # null before the person is assigned a meeting time
 
@@ -44,7 +50,10 @@ class Date(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     activity = db.Column(db.Integer, db.ForeignKey("activities.id"), nullable=True)
 
-    #time =# store its relation to google calendar
+    #
+    users = db.relationship("User", backref="date", lazy=True)
+    time_start = db.Column(db.DateTime, default=datetime.utcnow())
+    time_end = db.Column(db.DateTime, default=datetime.utcnow())
 
 
     def add_person(self,user_id):
@@ -68,5 +77,6 @@ class Date(db.Model):
         pass
 
 if __name__ == "__main__":
-    db.create_all()
+    with app.app_context:
+        db.create_all()
     # code to insert goees here.
