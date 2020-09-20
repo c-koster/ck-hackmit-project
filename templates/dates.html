@@ -7,16 +7,12 @@
 {% block body %}
     <h1> Dates </h1>
     <ul>
-    {% for d in dates %}
+    {% for date in dates %}
         <li>
-            {{ date.id }}
-            {% for p in dates.users %}
-                p
-            {% endfor %}
+            {{ date.time_descriptor }} - {{ date.name }} - {{ date.description }} - {{ date.link}}
         </li>
     {% endfor %}
     </ul>
 
-    {% endfor %}
 
 {% endblock %}

@@ -36,39 +36,33 @@ class User(db.Model):
     date_id = db.Column(db.Integer, db.ForeignKey("scheduled_dates.id"), nullable=True)
     # null before the person is assigned a meeting time
 
-
-class Activity(db.Model):
-    __tablename__ = "activities"
+class Date(db.Model):
+    __tablename__ = "scheduled_dates"
     id = db.Column(db.Integer, primary_key=True)
+
     name = db.Column(db.String(100))
     description = db.Column(db.String(800))
     link = db.Column(db.String(100))
 
 
-class Date(db.Model):
-    __tablename__ = "scheduled_dates"
-    id = db.Column(db.Integer, primary_key=True)
-    activity = db.Column(db.Integer, db.ForeignKey("activities.id"), nullable=True)
-
-    #
+    time_descriptor = db.Column(db.String(10))
     users = db.relationship("User", backref="date", lazy=True)
-    time_start = db.Column(db.DateTime, default=datetime.utcnow())
-    time_end = db.Column(db.DateTime, default=datetime.utcnow())
+
 
 
     def add_person(self,user_id):
         """
         Invite a person to this 'date'
         """
-
-        pass
+        db.session.add(p)
+        db.session.commit()
 
     def describe(self,activity_id):
         """
         Give this date an activity!
         """
-
-        pass
+        self.activity = activity_id
+        db.session.commit()
 
     def notify(self):
         """
@@ -77,6 +71,6 @@ class Date(db.Model):
         pass
 
 if __name__ == "__main__":
-    with app.app_context:
-        db.create_all()
+
+    db.create_all()
     # code to insert goees here.

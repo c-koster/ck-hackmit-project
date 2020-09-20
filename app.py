@@ -25,7 +25,6 @@ def add_user():
     """
     signup_request = request.form.get("name")
 
-    u = 
     #if some form variables don't exist or
 
     return redirect("/",msg="Success! We will communicate further with you once we've found a match.")
