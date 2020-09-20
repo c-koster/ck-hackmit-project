@@ -49,7 +49,6 @@ class Date(db.Model):
     users = db.relationship("User", backref="date", lazy=True)
 
 
-
     def add_person(self,user_id):
         """
         Invite a person to this 'date'

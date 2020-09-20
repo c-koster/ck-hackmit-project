@@ -26,16 +26,25 @@ def survey():
 def complete():
     return render_template("complete.html")
 
-@app.route("/post_user",methods=["POST"])
+@app.route("/useradd",methods=["POST"])
 def add_user():
     """
-    Signup attempts are routed here—either inserted or rejected
+    Signup attempts are routed here — either inserted or rejected
     """
-    signup_request = request.form.get("name")
 
-    #if some form variables don't exist or
+    name = request.form.get("name")
+    email = request.form.get("email")
 
-    return redirect("/",msg="Success! We will communicate further with you once we've found a match.")
+    print(name)
+    print(email)
+
+    u = User(name=name, email=email,phone="000000000",openness=1,consc=2,extraversion=3,agreeable=4,neuroticism=5,major="Undeclared")
+
+    db.session.add(u)
+    db.session.commit()
+    return redirect("/complete")
+
+
 
 
 @app.route("/dates")

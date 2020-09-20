@@ -7,17 +7,18 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="ui huge header">Please Complete the Following Survey</h6>
-      <form class="ui form">
+    <h1 class="ui huge header">Please Complete the Following Survey</h1>
+    <form class="ui form" action="{{ url_for('add_user') }}" method="post">
+
     <div class="field">
     <label>Full Name</label>
-    <input type="text" name="first-name" placeholder="First Last">
+    <input type="text" name="name" placeholder="First Last">
     </div>
     <div class="field">
     <label>Email Address</label>
-    <input type="text" name="last-name" placeholder=".edu address">
+    <input type="text" name="email" placeholder=".edu address">
     </div>
-    </form>
+
     <h6 class="ui medium header">Personality Test: For each statement, please indicate how much agree or disagree (1-strongly disagree, 5-strongly agree)</h6>
     <h3 class="ui small header">1. I am the life of the party.</h3>
     <div class="ui buttons">
@@ -92,13 +93,7 @@
     <button class="ui medium yellow button">Music</button>
     <hr>
     <hr>
-        <button class="ui button" onclick = "doRedirect1();" type="submit">Submit</button>
+    <button class="ui button" type="submit">Submit</button>
+    </form>
 
-
-    <script type="text/javascript">
-
-    function doRedirect1() {
-      window.location.replace("http://localhost:5000/complete")
-    }
-    </script>
 {% endblock %}
