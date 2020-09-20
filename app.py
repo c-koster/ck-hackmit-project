@@ -18,6 +18,14 @@ db.init_app(app)
 def index():
     return render_template("index.html")
 
+@app.route("/survey")
+def survey():
+    return render_template("survey.html")
+
+@app.route("/complete")
+def complete():
+    return render_template("complete.html")
+
 @app.route("/post_user",methods=["POST"])
 def add_user():
     """

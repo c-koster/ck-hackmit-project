@@ -1,11 +1,104 @@
-from culton to brandon
+
 {% extends "layout.html" %}
 
 
 {% block title %}
-    Form
+    Survey
 {% endblock %}
 
-{% block body %}
-    form elements go here
+{% block content %}
+    <h1 class="ui huge header">Please Complete the Following Survey</h6>
+      <form class="ui form">
+    <div class="field">
+    <label>Full Name</label>
+    <input type="text" name="first-name" placeholder="First Last">
+    </div>
+    <div class="field">
+    <label>Email Address</label>
+    <input type="text" name="last-name" placeholder=".edu address">
+    </div>
+    </form>
+    <h6 class="ui medium header">Personality Test: For each statement, please indicate how much agree or disagree (1-strongly disagree, 5-strongly agree)</h6>
+    <h3 class="ui small header">1. I am the life of the party.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+
+    <h3 class="ui small header">2. I feel little concern for others.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+
+    <h3 class="ui small header">3. I don't talk a lot.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+
+    <h3 class="ui small header">4. I sympathize with others' feelings.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+
+    <h3 class="ui small header">5. I get upset easily.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+
+    <h3 class="ui small header">6. I take time out for others.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+
+    <h3 class="ui small header">7. I spend time reflecting on things.</h3>
+    <div class="ui buttons">
+      <button class="ui basic red button">1</button>
+      <button class="ui basic blue button">2</button>
+      <button class="ui basic green button">3</button>
+      <button class="ui basic violet button">4</button>
+      <button class="ui basic brown button">5</button>
+    </div>
+    <h6 class="ui medium header"> Interests: Of the following categories: Select the 3 you are most interested in</h6>
+    <button class="ui medium olive button">Tech</button>
+    <button class="ui medium green button">Finance</button>
+    <button class="ui medium purple button">Business</button>
+    <button class="ui medium teal button">Politics</button>
+    <button class="ui medium violet button">History</button>
+    <button class="ui medium red button">Sports</button>
+    <button class="ui medium brown button">Science</button>
+    <button class="ui medium yellow button">Music</button>
+    <hr>
+    <hr>
+        <button class="ui button" onclick = "doRedirect1();" type="submit">Submit</button>
+
+
+    <script type="text/javascript">
+
+    function doRedirect1() {
+      window.location.replace("http://localhost:5000/complete")
+    }
+    </script>
 {% endblock %}
