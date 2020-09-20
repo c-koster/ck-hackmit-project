@@ -36,6 +36,7 @@ class User(db.Model):
     date_id = db.Column(db.Integer, db.ForeignKey("scheduled_dates.id"), nullable=True)
     # null before the person is assigned a meeting time
 
+
 class Date(db.Model):
     __tablename__ = "scheduled_dates"
     id = db.Column(db.Integer, primary_key=True)
@@ -53,7 +54,8 @@ class Date(db.Model):
         """
         Invite a person to this 'date'
         """
-        db.session.add(p)
+        u = User.query.get(user_id)
+        u.date_id = self.id
         db.session.commit()
 
     def describe(self,activity_id):

@@ -9,10 +9,31 @@
     <ul>
     {% for date in dates %}
         <li>
-            {{ date.time_descriptor }} - {{ date.name }} - {{ date.description }} - {{ date.link}}
+            {{ date.time_descriptor }} - {{ date.name }} - {{ date.description }} - <a href ="{{ date.link}}">link </a>
+            <ol>
+                <li>
+                    {% for p in date.users %}
+                        {{ p.name }}
+                    {% endfor %}
+                </li>
+            </ol>
         </li>
     {% endfor %}
     </ul>
+
+    <form action="{{ url_for('view_dates') }}" method="post">
+        <select name="date_id">
+            {% for date in dates %}
+                <option value="{{ date.id }}">{{ date.name }} - {{ date.time_descriptor }}</option>
+            {% endfor %}
+        </select>
+        <select name="user_id">
+            {% for user in users %}
+                <option value="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+        <button>Add to date</button>
+    </form>
 
 
 {% endblock %}

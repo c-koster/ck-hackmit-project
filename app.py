@@ -9,7 +9,6 @@ base = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + os.path.join(base, 'app.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['DEBUG'] = True
 
 db.init_app(app)
 
@@ -39,20 +38,26 @@ def add_user():
     print(email)
 
     u = User(name=name, email=email,phone="000000000",openness=1,consc=2,extraversion=3,agreeable=4,neuroticism=5,major="Undeclared")
-
     db.session.add(u)
     db.session.commit()
     return redirect("/complete")
 
 
-
-
-@app.route("/dates")
+@app.route("/dates",methods=["GET","POST"])
 def view_dates():
     # see all dates !
+    if (request.method == "POST"):
+        date_id = request.form.get("date_id")
+        user_id = request.form.get("user_id")
+        date = Date.query.get(date_id)
+        date.add_person(user_id)
+
+
+
     """List all Dates."""
     dates = Date.query.all()
-    return render_template("dates.html",dates=dates)
+    users = User.query.all()
+    return render_template("dates.html",dates=dates,users=users)
 
 
 @app.route("/users")
